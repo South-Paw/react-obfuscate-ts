@@ -1,0 +1,81 @@
+{
+  "name": "@south-paw/react-obfuscate-ts",
+  "version": "0.0.1-alpha.1",
+  "description": "A React component to obfuscate your website's contact links",
+  "keywords": [
+    "react",
+    "component",
+    "obfuscate",
+    "hide",
+    "email",
+    "tel",
+    "sms",
+    "link",
+    "countries"
+  ],
+  "homepage": "https://github.com/South-Paw/react-obfuscate-ts",
+  "bugs": "https://github.com/South-Paw/react-obfuscate-ts",
+  "license": "MIT",
+  "author": {
+    "name": "Alex Gabites",
+    "email": "hello@southpaw.co.nz",
+    "url": "http://southpaw.co.nz"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/react-obfuscate-ts.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/South-Paw/react-obfuscate-ts.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "tsdx watch",
+    "start:storybook": "start-storybook -p 9000",
+    "build": "tsdx build",
+    "build:storybook": "build-storybook",
+    "lint": "eslint ./src",
+    "test": "tsdx test --passWithNoTests",
+    "prepublishOnly": "yarn clean && yarn build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@storybook/addon-actions": "^6.0.0-rc.14",
+    "@storybook/addon-docs": "^6.0.0-rc.14",
+    "@storybook/addon-knobs": "^6.0.0-rc.14",
+    "@storybook/react": "^6.0.0-rc.14",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.1",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "@typescript-eslint/parser": "^3.6.1",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-typescript": "^8.0.2",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.18.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "styled-components": "^5.1.1",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.6"
+  },
+  "peerDependencies": {
+    "react": ">=16.13.0",
+    "styled-components": ">=5.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
