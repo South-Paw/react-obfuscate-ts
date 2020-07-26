@@ -10,8 +10,7 @@
     "email",
     "tel",
     "sms",
-    "link",
-    "countries"
+    "link"
   ],
   "homepage": "https://github.com/South-Paw/react-obfuscate-ts",
   "bugs": "https://github.com/South-Paw/react-obfuscate-ts",
