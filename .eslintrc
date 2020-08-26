@@ -1,10 +1,14 @@
 {
-  "extends": ["airbnb-typescript", "plugin:prettier/recommended", "plugin:jest/recommended"],
+  "extends": [
+    "airbnb-typescript",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:jest/recommended"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/indent": "off",
     "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
@@ -15,7 +19,7 @@
       }
     },
     {
-      "files": ["**/*.storiess.tsx"],
+      "files": ["**/*.stories.tsx"],
       "rules": {
         "import/no-extraneous-dependencies": "off"
       }

@@ -1,6 +1,21 @@
 export const noop = () => {};
 
-export const reverse = (content: string) => content.split('').reverse().join('');
+export const reverse = (content: string) =>
+  content
+    .split('')
+    .reverse()
+    .map((s) => {
+      if (s === '(') return ')';
+      if (s === ')') return '(';
+      if (s === '[') return ']';
+      if (s === ']') return '[';
+      if (s === '{') return '}';
+      if (s === '}') return '{';
+      if (s === '<') return '>';
+      if (s === '>') return '<';
+      return s;
+    })
+    .join('');
 
 export const isString = (s: any): s is string => typeof s === 'string';
 
@@ -28,10 +43,7 @@ export const createUri = ({ email, tel, sms, href, children }: CreateUriProps) =
     if (children) return `sms:${children.replace(/\s/g, '')}`;
   }
 
-  if (href) {
-    if (isString(href)) return href;
-    if (children) return children;
-  }
+  if (href) return href;
 
   return undefined;
 };

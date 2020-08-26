@@ -1,6 +1,5 @@
 {
   "include": ["src", "types"],
-  "exclude": ["**/*.stories.tsx"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
