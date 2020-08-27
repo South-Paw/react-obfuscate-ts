@@ -1,7 +1,7 @@
 {
   "name": "@south-paw/react-obfuscate-ts",
-  "version": "0.0.1-alpha.2",
-  "description": "A React component to obfuscate your website's contact links",
+  "version": "1.0.0",
+  "description": "A React component to obfuscate contact links and text",
   "keywords": [
     "react",
     "component",
@@ -31,11 +31,11 @@
     "url": "https://github.com/South-Paw/react-obfuscate-ts.git"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist storybook-static",
     "start": "tsdx watch",
     "start:storybook": "start-storybook -p 9000",
     "build": "tsdx build",
-    "build:storybook": "build-storybook",
+    "build:storybook": "build-storybook --docs",
     "lint": "eslint ./src",
     "test": "tsdx test --passWithNoTests",
     "prepublishOnly": "yarn clean && yarn build"
@@ -43,13 +43,13 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.11.4",
-    "@storybook/addon-actions": "^6.0.18",
-    "@storybook/addon-docs": "^6.0.18",
-    "@storybook/addon-knobs": "^6.0.18",
-    "@storybook/react": "^6.0.18",
+    "@storybook/addon-actions": "^6.0.19",
+    "@storybook/addon-docs": "^6.0.19",
+    "@storybook/addon-knobs": "^6.0.19",
+    "@storybook/react": "^6.0.19",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
-    "@types/react": "^16.9.47",
+    "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.2",
     "@typescript-eslint/eslint-plugin": "^3.10.1",

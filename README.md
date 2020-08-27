@@ -1,6 +1,6 @@
 # @south-paw/react-obfuscate-ts
 
-🕵️ A React component to obfuscate your website's contact links
+🕵️ A React component to obfuscate contact links and text
 
 [![npm](https://img.shields.io/npm/v/@south-paw/react-obfuscate-ts.svg)](https://www.npmjs.com/package/@south-paw/react-obfuscate-ts)
 

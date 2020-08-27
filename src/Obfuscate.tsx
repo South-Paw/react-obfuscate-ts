@@ -46,6 +46,19 @@ export interface ObfuscateProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
   obfuscateText?: string;
 }
 
+/**
+ * A React component to obfuscate your contact links and text on your website.
+ *
+ * ```
+ * // use the component's children to create the link and display
+ * <Obfuscate email>hello@example.com</Obfuscate>
+ *
+ * // or specify the email address for the link with custom children
+ * <Obfuscate email="hello@example.com">Email me!</Obfuscate>
+ * ```
+ *
+ * @see https://github.com/South-Paw/react-obfuscate-ts
+ */
 const Obfuscate: React.FC<ObfuscateProps> = ({
   email,
   tel,
