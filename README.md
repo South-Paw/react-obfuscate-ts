@@ -30,7 +30,7 @@ const Example2 = () => <Obfuscate email="hello@example.com">Email me!</Obfuscate
 
 ## Inspiration
 
-I was inspired to create this package after using the [coston/react-obfuscate](https://github.com/coston/react-obfuscate) package for two years. After switching the majority of my own code bases to TypeScript, I was disapointed to see there was no `@types` package for this original version and that it wasn't reliably obfuscating in some of my usages of the component. I decided that I'd do a variant of that component with a new API, a few minor bug fixes and one that included types as well.
+I was inspired to create this package after using the [coston/react-obfuscate](https://github.com/coston/react-obfuscate) package for two years. After switching the majority of my own code bases to TypeScript, I was disappointed to see there was no `@types` package for this original version and that it wasn't reliably obfuscating in some of my usages of the component. I decided that I'd do a variant of that component with a new API, a few minor bug fixes and one that included types as well.
 
 ## Issues and Bugs
 
