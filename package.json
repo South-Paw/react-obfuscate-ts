@@ -1,6 +1,6 @@
 {
   "name": "@south-paw/react-obfuscate-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A React component to obfuscate contact links and text",
   "keywords": [
     "react",
@@ -37,8 +37,7 @@
     "build": "tsdx build",
     "build:storybook": "build-storybook --docs",
     "lint": "eslint ./src",
-    "test": "tsdx test --passWithNoTests",
-    "prepublishOnly": "yarn clean && yarn build"
+    "test": "tsdx test --passWithNoTests"
   },
   "dependencies": {},
   "devDependencies": {

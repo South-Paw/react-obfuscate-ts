@@ -3,13 +3,15 @@
 🕵️ A React component to obfuscate contact links and text
 
 [![npm](https://img.shields.io/npm/v/@south-paw/react-obfuscate-ts.svg)](https://www.npmjs.com/package/@south-paw/react-obfuscate-ts)
+[![Dependencies](https://david-dm.org/south-paw/react-obfuscate-ts/status.svg)](https://david-dm.org/south-paw/react-obfuscate-ts)
+[![Dev Dependencies](https://david-dm.org/south-paw/react-obfuscate-ts/dev-status.svg)](https://david-dm.org/south-paw/react-obfuscate-ts?type=dev)
 
 ## Features
 
 - Easy to implement component for hiding your contact links or text in the DOM.
 - Supports obfuscation of `email`, `tel`, `sms`, `href` and any other string of text as a child.
 - Out of the box `aria-label` for screen readers to identify the obfuscated element.
-- Supports the styled-components `as` prop for use with other Link components (such as your own UI libraries link).
+- Supports the styled-components `as` prop for use with other Link components (such as your own UI libraries link component).
 
 ## How it works
 
