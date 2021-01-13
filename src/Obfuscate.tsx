@@ -105,23 +105,32 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
         window.location.href = uri;
       }
     },
-    [uri, onClick],
+    [humanInteraction, uri, onClick],
   );
 
-  const handleOnFocus = React.useCallback<(e: React.FocusEvent<HTMLAnchorElement>) => void>((e) => {
-    onFocus(e);
-    setHumanInteraction(true);
-  }, []);
+  const handleOnFocus = React.useCallback<(e: React.FocusEvent<HTMLAnchorElement>) => void>(
+    (e) => {
+      onFocus(e);
+      setHumanInteraction(true);
+    },
+    [onFocus],
+  );
 
-  const handleOnMouseOver = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>((e) => {
-    onMouseOver(e);
-    setHumanInteraction(true);
-  }, []);
+  const handleOnMouseOver = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>(
+    (e) => {
+      onMouseOver(e);
+      setHumanInteraction(true);
+    },
+    [onMouseOver],
+  );
 
-  const handleOnContextMenu = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>((e) => {
-    onContextMenu(e);
-    setHumanInteraction(true);
-  }, []);
+  const handleOnContextMenu = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>(
+    (e) => {
+      onContextMenu(e);
+      setHumanInteraction(true);
+    },
+    [onContextMenu],
+  );
 
   return (
     <Component

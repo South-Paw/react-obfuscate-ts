@@ -1,7 +1,10 @@
 {
   "extends": [
     "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "prettier/react",
     "prettier/@typescript-eslint",
     "plugin:jest/recommended"
   ],
@@ -9,6 +12,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
