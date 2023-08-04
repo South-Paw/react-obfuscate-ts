@@ -1,18 +1,24 @@
-/* eslint-env browser */
-
-import * as React from 'react';
-import styled from 'styled-components';
+import {
+  AllHTMLAttributes,
+  CSSProperties,
+  ElementType,
+  FocusEventHandler,
+  MouseEventHandler,
+  createElement,
+  forwardRef,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { createUri, isString, noop, reverse } from './util';
 
-const Component = styled('a')``;
-
-export interface ObfuscateProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ObfuscateBaseProps {
   /**
-   * Styled components's `as` polymorphic prop.
+   * Polymorphic `as` component. Use this to change the Obfuscate element.
    *
-   * View the [`styled-components` docs](https://styled-components.com/docs/api#as-polymorphic-prop) for more information.
+   * @default 'a'
    */
-  as?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
+  as?: ElementType;
   /**
    * When set as a `boolean`, the component will treat the `children` as an email address.
    * Alternatively when set as a `string` the prop will be used to create the href and use the `children` for display.
@@ -33,50 +39,62 @@ export interface ObfuscateProps extends React.AnchorHTMLAttributes<HTMLAnchorEle
    */
   href?: string;
   /**
-   * Children to be displayed in the component. Will be ignored if any other obfuscate props recieve strings except `href`.
+   * Children to be displayed in the component. Will be ignored if any other obfuscate props receive strings except `href`.
    */
   children?: string;
   /**
    * Override the `aria-label` when component is obfuscated.
+   *
+   * @default 'focus to reveal obfuscated content'
    */
   'aria-label'?: string;
   /**
    * Override the text shown in the `href` when component is obfuscated.
+   *
+   * @default 'obfuscated'
    */
   obfuscateText?: string;
 }
 
+export interface ObfuscateProps
+  extends ObfuscateBaseProps,
+    Omit<AllHTMLAttributes<HTMLElement>, keyof ObfuscateBaseProps> {}
+
 /**
  * A React component to obfuscate your contact links and text on your website.
  *
- * ```
+ * ```tsx
  * // use the component's children to create the link and display
  * <Obfuscate email>hello@example.com</Obfuscate>
  *
  * // or specify the email address for the link with custom children
- * <Obfuscate email="hello@example.com">Email me!</Obfuscate>
+ * <Obfuscate email="hello@example.com">Send email</Obfuscate>
  * ```
  *
  * @see https://github.com/South-Paw/react-obfuscate-ts
  */
-const Obfuscate: React.FC<ObfuscateProps> = ({
-  email,
-  tel,
-  sms,
-  href,
-  children,
-  'aria-label': ariaLabel = 'focus to reveal obfuscated content',
-  obfuscateText = 'obfuscated',
-  style,
-  onClick = noop,
-  onFocus = noop,
-  onMouseOver = noop,
-  onContextMenu = noop,
-  ...other
-}) => {
-  const [humanInteraction, setHumanInteraction] = React.useState(false);
+export const Obfuscate = forwardRef<HTMLElement, ObfuscateProps>(function Obfuscate(
+  {
+    as = 'a',
+    email,
+    tel,
+    sms,
+    href,
+    children,
+    'aria-label': ariaLabel = 'focus to reveal obfuscated content',
+    obfuscateText = 'obfuscated',
+    style,
+    onClick = noop,
+    onFocus = noop,
+    onMouseOver = noop,
+    onContextMenu = noop,
+    ...rest
+  },
+  ref,
+) {
+  const [humanInteraction, setHumanInteraction] = useState(false);
 
-  const componentStyle = React.useMemo<React.CSSProperties>(
+  const componentStyle = useMemo<CSSProperties>(
     () => ({
       ...style,
       unicodeBidi: 'bidi-override',
@@ -85,7 +103,7 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     [style, humanInteraction],
   );
 
-  const content = React.useMemo(() => {
+  const content = useMemo(() => {
     if (children) return children;
     if (isString(email)) return email;
     if (isString(tel)) return tel;
@@ -94,10 +112,10 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     return '';
   }, [children, email, tel, sms, href]);
 
-  const uri = React.useMemo(() => createUri({ email, tel, sms, href, children }), [email, tel, sms, href, children]);
-  const hrefUri = React.useMemo(() => (humanInteraction ? uri : obfuscateText), [humanInteraction, uri, obfuscateText]);
+  const uri = useMemo(() => createUri({ email, tel, sms, href, children }), [email, tel, sms, href, children]);
+  const hrefUri = useMemo(() => (humanInteraction ? uri : obfuscateText), [humanInteraction, uri, obfuscateText]);
 
-  const handleOnClick = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>(
+  const handleOnClick = useCallback<MouseEventHandler<HTMLElement>>(
     (e) => {
       onClick(e);
 
@@ -108,7 +126,7 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     [humanInteraction, uri, onClick],
   );
 
-  const handleOnFocus = React.useCallback<(e: React.FocusEvent<HTMLAnchorElement>) => void>(
+  const handleOnFocus = useCallback<FocusEventHandler<HTMLElement>>(
     (e) => {
       onFocus(e);
       setHumanInteraction(true);
@@ -116,7 +134,7 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     [onFocus],
   );
 
-  const handleOnMouseOver = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>(
+  const handleOnMouseOver = useCallback<MouseEventHandler<HTMLElement>>(
     (e) => {
       onMouseOver(e);
       setHumanInteraction(true);
@@ -124,7 +142,7 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     [onMouseOver],
   );
 
-  const handleOnContextMenu = React.useCallback<(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void>(
+  const handleOnContextMenu = useCallback<MouseEventHandler<HTMLElement>>(
     (e) => {
       onContextMenu(e);
       setHumanInteraction(true);
@@ -132,22 +150,20 @@ const Obfuscate: React.FC<ObfuscateProps> = ({
     [onContextMenu],
   );
 
-  return (
-    <Component
-      style={componentStyle}
-      href={uri ? hrefUri : undefined}
-      aria-label={humanInteraction ? undefined : ariaLabel}
-      onClick={handleOnClick}
-      onFocus={handleOnFocus}
-      onMouseOver={handleOnMouseOver}
-      onContextMenu={handleOnContextMenu}
-      {...other}
-    >
-      {humanInteraction ? content : reverse(content)}
-    </Component>
+  return createElement(
+    as,
+    {
+      style: componentStyle,
+      href: uri ? hrefUri : undefined,
+      'aria-label': humanInteraction ? undefined : ariaLabel,
+      onClick: handleOnClick,
+      onFocus: handleOnFocus,
+      onMouseOver: handleOnMouseOver,
+      onContextMenu: handleOnContextMenu,
+      ...rest,
+
+      ref,
+    },
+    humanInteraction ? content : reverse(content),
   );
-};
-
-Obfuscate.displayName = 'Obfuscate';
-
-export { Obfuscate };
+});
