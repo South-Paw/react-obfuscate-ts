@@ -1,6 +1,6 @@
 {
   "name": "@south-paw/react-obfuscate-ts",
-  "version": "1.0.2",
+  "version": "2.0.0-beta.1",
   "description": "A React component to obfuscate contact links and text",
   "keywords": [
     "react",
