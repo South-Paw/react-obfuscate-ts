@@ -1,14 +1,16 @@
-name: Release
+name: Draft Release
 
 on:
   push:
-    tags:
+    branches:
+      - "main"
+    tags-ignore:
       - "*.*.*"
   workflow_dispatch:
 
 jobs:
-  deploy-production:
-    name: Deploy production
+  deploy-draft:
+    name: Deploy draft
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
@@ -18,7 +20,7 @@ jobs:
         uses: bobheadxi/deployments@v1
         id: deployment
         with:
-          env: production
+          env: staging
           step: start
 
       - name: Checkout repository
@@ -40,7 +42,7 @@ jobs:
         uses: South-Paw/action-netlify-cli@v1
         id: netlify
         with:
-          args: 'deploy --prod --json --dir \"./storybook-static\" --message \"production [${{ github.sha }}]\"'
+          args: 'deploy --json --dir \"./storybook-static\" --message \"draft [${{ github.sha }}]\"'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -53,32 +55,5 @@ jobs:
           step: finish
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          env_url: ${{ steps.netlify.outputs.NETLIFY_PROD_URL }}
+          env_url: ${{ steps.netlify.outputs.NETLIFY_DRAFT_URL }}
           override: false
-
-  publish:
-    name: Publish package
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
-
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build package
-        run: npm run build
-
-      - name: Publish package
-        uses: JS-DevTools/npm-publish@v2
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
