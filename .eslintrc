@@ -1,38 +1,40 @@
 {
   "extends": [
+    "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier/react",
-    "prettier/@typescript-eslint",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:storybook/recommended"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react/jsx-props-no-spreading": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off"
   },
   "overrides": [
     {
-      "files": ["**/*.tsx"],
-      "rules": {
-        "react/prop-types": "off"
-      }
+      "files": ["tsup.config.ts"],
+      "rules": { "import/no-extraneous-dependencies": "off" }
     },
     {
-      "files": ["**/*.stories.tsx"],
+      "files": ["**/*.stories.*"],
       "rules": {
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "react-hooks/rules-of-hooks": "off",
+        "react/function-component-definition": "off"
       }
     }
-  ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
+  ]
 }
